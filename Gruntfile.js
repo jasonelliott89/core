@@ -14,6 +14,21 @@ module.exports = function(grunt) {
 			},
 		},
 
+		sass: {                              // Task
+			dist: {                            // Target
+				options: {                       // Target options
+					style: 'expanded'
+				},
+				files: [{
+					expand: true,
+					cwd: 'sass',
+					src: ['*.scss'],
+					dest: 'assets/css',
+					ext: '.css'
+				}]
+			}
+		},
+
 		includereplace: {
 			core: {
 				options: {
@@ -35,6 +50,10 @@ module.exports = function(grunt) {
 			html: {
 				files: ['source/**/*.html'],
 				tasks: ['clean:build', 'includereplace', 'copy:main', 'clean:tmp']
+			},
+			css: {
+				files: ['sass/**/*.scss'],
+				tasks: ['sass']
 			}
 		},
 
@@ -52,6 +71,7 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-clean');
 	grunt.loadNpmTasks('grunt-contrib-connect');
 	grunt.loadNpmTasks('grunt-contrib-copy');
+	grunt.loadNpmTasks('grunt-contrib-sass');	
 	grunt.loadNpmTasks('grunt-contrib-watch');	
 	grunt.loadNpmTasks('grunt-include-replace');
 
